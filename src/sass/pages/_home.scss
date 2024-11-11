@@ -1,16 +1,114 @@
-/* home */
+/* home.scss */
 @use "../abstracts/variables" as var;
 @use "../base/typography" as type;
 
-body {
-  font-family: type.$font;
-  background-color: var.$bg-very-light;
-  width: min(100% - 2rem, 60ch);
-  margin-inline: auto;
-  margin-block: 4rem;
+@import url('https://fonts.googleapis.com/css2?family=Faculty+Glyphic&display=swap');
+
+:root {
+  --level-one: translateZ(4rem);
+  --level-two: translateZ(7rem);
+  --level-three: translateZ(10rem);
+
+  --fw-normal: 400;
+  --fw-bold: 700;
+
+  --clr: #b7c9e5;
 }
 
-h1 {
-  color: var.$primary-color;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.card {
+  width: 100%;
+  max-width: 450px;
+}
+
+
+.card__content {
   text-align: center;
+  position: relative;
+  padding: 15em 5em;
+  transition: transform 2s ease-in-out;
+  transform-style: preserve-3d;
+}
+
+.card:hover .card__content {
+  transform: rotateY(180deg);
+  transition: transform 2s ease-in-out;
+}
+
+.card__front,
+.card__back {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 5em 3em;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  display: grid;
+  align-content: center;
+}
+
+.card__front {
+  background-color: var(--clr);
+  background-image: url('../images/cat.jpg');
+  background-size: cover;
+}
+
+.card__front::before {
+  content: '';
+  position: absolute;
+  --spacer: 1em;
+  top: var(--spacer);
+  bottom: var(--spacer);
+  left: var(--spacer);
+  right: var(--spacer);
+  transform: var(--level-one);
+}
+
+.card__title {
+  font-size: 4.5rem;
+  transform: translateZ(6rem) translateY(-1rem);
+  order: 2;
+  text-transform: uppercase;
+}
+
+.card__subtitle {
+  transform: var(--level-two) translateY(-1rem);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 1rem;
+  font-weight: var(--fw-bold);
+  opacity: .7;
+}
+
+.card__title,
+.card__subtitle {
+  color: #fff;
+}
+
+.card__body {
+  transform: translateZ(2rem);
+  font-weight: var(--fw-normal);
+  font-size: 1.5rem;
+  line-height: 1.6;
+}
+
+.card__back {
+  transform: rotateY(180deg);
+  color: var(--clr);
+  background: #333;
 }
